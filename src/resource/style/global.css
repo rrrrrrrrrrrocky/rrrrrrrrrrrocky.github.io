@@ -1,0 +1,56 @@
+@tailwind base;
+
+@layer base {
+  @font-face {
+    font-family: "Pretendard";
+    font-weight: 400;
+    src: url("/fonts/pretendard-regular-400.subset.woff2") format("woff2");
+    font-display: swap;
+  }
+  @font-face {
+    font-family: "Pretendard";
+    font-weight: 500;
+    src: url("/fonts/pretendard-medium-500.subset.woff2") format("woff2");
+    font-display: swap;
+  }
+  @font-face {
+    font-family: "Pretendard";
+    font-weight: 600;
+    src: url("/fonts/pretendard-semi-bold-600.subset.woff2") format("woff2");
+    font-display: swap;
+  }
+  @font-face {
+    font-family: "Pretendard";
+    font-weight: 700;
+    src: url("/fonts/pretendard-bold-700.subset.woff2") format("woff2");
+    font-display: swap;
+  }
+
+  html {
+    font-family:
+      "Pretendard",
+      ui-sans-serif,
+      system-ui,
+      -apple-system,
+      BlinkMacSystemFont,
+      "Segoe UI",
+      Roboto,
+      "Helvetica Neue",
+      Arial,
+      "Noto Sans",
+      sans-serif,
+      "Apple Color Emoji",
+      "Segoe UI Emoji",
+      "Segoe UI Symbol",
+      "Noto Color Emoji";
+  }
+  body {
+    padding: env(safe-area-inset-top) env(safe-area-inset-right)
+      env(safe-area-inset-bottom) env(safe-area-inset-left);
+    padding: constant(safe-area-inset-top) constant(safe-area-inset-right)
+      constant(safe-area-inset-bottom) constant(safe-area-inset-left);
+  }
+}
+
+@tailwind components;
+@tailwind utilities;
