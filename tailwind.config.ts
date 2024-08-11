@@ -1,181 +1,14 @@
-import { CSSProperties } from "react";
-import { type Config } from "tailwindcss";
-import { current, inherit, transparent } from "tailwindcss/colors";
 import plugin from "tailwindcss/plugin";
 import { CSSRuleObject } from "tailwindcss/types/config";
+import type { Config } from "tailwindcss";
+import { CSSProperties } from "react";
 
 /** @type {import('tailwindcss').Config} */
 const config = {
-  content: ["./src/**/*.{ts,tsx}"],
   darkMode: ["class"],
-  plugins: [
-    plugin(({ addUtilities }) => {
-      addUtilities(utilClasses as CSSRuleObject);
-    }),
-    require("tailwindcss-animate"),
-  ],
+  content: ["./src/**/*.{ts,tsx}"],
   prefix: "",
   theme: {
-    /**
-     * @description theme.colors에 넣으면 기본 제공 컬러들이 사라짐
-     * @description theme.extend.colors는 기본 컬러 유지
-     * */
-    colors: {
-      // accent: {
-      //   DEFAULT: 'hsl(var(--accent))',
-      //   foreground: 'hsl(var(--accent-foreground))',
-      // },
-      // background: 'hsl(var(--background))',
-      // border: 'hsl(var(--border))',
-      // card: {
-      //   DEFAULT: 'hsl(var(--card))',
-      //   foreground: 'hsl(var(--card-foreground))',
-      // },
-      // destructive: {
-      //   DEFAULT: 'hsl(var(--destructive))',
-      //   foreground: 'hsl(var(--destructive-foreground))',
-      // },
-      // foreground: 'hsl(var(--foreground))',
-      // input: 'hsl(var(--input))',
-      // muted: {
-      //   DEFAULT: 'hsl(var(--muted))',
-      //   foreground: 'hsl(var(--muted-foreground))',
-      // },
-      // popover: {
-      //   DEFAULT: 'hsl(var(--popover))',
-      //   foreground: 'hsl(var(--popover-foreground))',
-      // },
-      // primary: {
-      //   DEFAULT: 'hsl(var(--primary))',
-      //   foreground: 'hsl(var(--primary-foreground))',
-      // },
-      // ring: 'hsl(var(--ring))',
-      // secondary: {
-      //   DEFAULT: 'hsl(var(--secondary))',
-      //   foreground: 'hsl(var(--secondary-foreground))',
-      // },
-      r: {
-        black: "#000000",
-        blue: {
-          1: "#F2FBFE",
-          10: "#276FDE",
-          12: "#0E4E97",
-          2: "#ECF6FF",
-          9: {
-            DEFAULT: "#2F80ED",
-            disabled: "#97BFF6",
-          },
-          // DEFAULT: '#2F80ED',
-        },
-        current,
-        gray: {
-          1: {
-            DEFAULT: "#F7F8F9",
-            disabled: "#FBFBFC",
-          },
-          10: {
-            DEFAULT: "#383B3E",
-            disabled: "#9B9D9E",
-          },
-          11: "#26282B",
-          12: "#1A1B1E",
-          2: "#F3F3F3",
-          3: {
-            DEFAULT: "#E8EBED",
-            disabled: "#F3F5F6",
-          },
-          4: "#C9CDD2",
-          5: "#9FA4AA",
-          6: "#8A8D90",
-          7: "#72787F",
-          8: "#616569",
-          9: "#464C53",
-          // DEFAULT: '#26282B',
-        },
-        inherit,
-        red: {
-          1: "#FFF3F5",
-          10: "#D62525",
-          11: "#B32424",
-          12: "#990505",
-          2: "#FEE7E6",
-          3: "#FFDDDD",
-          4: "#FFD2D8",
-          5: "#FFB5BE",
-          6: "#FF9595",
-          7: "#FE7474",
-          8: "#EB5757",
-          9: "#F43636",
-          DEFAULT: "#EB5757",
-        },
-        transparent,
-        white: "#FFFFFF",
-      },
-    },
-    container: {
-      center: true,
-      padding: "2rem",
-      screens: {
-        "2xl": "1400px",
-      },
-    },
-    extend: {
-      animation: {
-        "accordion-down": "accordion-down 0.2s ease-out",
-        "accordion-up": "accordion-up 0.2s ease-out",
-      },
-      borderRadius: {
-        lg: "16px",
-        md: "8px",
-        sm: "4px",
-      },
-      colors: {},
-      // colors: {
-      //   accent: {
-      //     DEFAULT: 'hsl(var(--accent))',
-      //     foreground: 'hsl(var(--accent-foreground))',
-      //   },
-      //   background: 'hsl(var(--background))',
-      //   border: 'hsl(var(--border))',
-      //   card: {
-      //     DEFAULT: 'hsl(var(--card))',
-      //     foreground: 'hsl(var(--card-foreground))',
-      //   },
-      //   destructive: {
-      //     DEFAULT: 'hsl(var(--destructive))',
-      //     foreground: 'hsl(var(--destructive-foreground))',
-      //   },
-      //   foreground: 'hsl(var(--foreground))',
-      //   input: 'hsl(var(--input))',
-      //   muted: {
-      //     DEFAULT: 'hsl(var(--muted))',
-      //     foreground: 'hsl(var(--muted-foreground))',
-      //   },
-      //   popover: {
-      //     DEFAULT: 'hsl(var(--popover))',
-      //     foreground: 'hsl(var(--popover-foreground))',
-      //   },
-      //   primary: {
-      //     DEFAULT: 'hsl(var(--primary))',
-      //     foreground: 'hsl(var(--primary-foreground))',
-      //   },
-      //   ring: 'hsl(var(--ring))',
-      //   secondary: {
-      //     DEFAULT: 'hsl(var(--secondary))',
-      //     foreground: 'hsl(var(--secondary-foreground))',
-      //   },
-      // },
-      keyframes: {
-        "accordion-down": {
-          from: { height: "0" },
-          to: { height: "var(--radix-accordion-content-height)" },
-        },
-        "accordion-up": {
-          from: { height: "var(--radix-accordion-content-height)" },
-          to: { height: "0" },
-        },
-      },
-    },
     fontFamily: {
       pretendard: [
         "Pretendard",
@@ -195,29 +28,74 @@ const config = {
         "Noto Color Emoji",
       ],
     },
-    // fontSize: {
-    //   'body1': ['16px', { fontWeight: '400', lineHeight: '20px' }],
-    //   'body1-bold': ['16px', { fontWeight: '500', lineHeight: '20px' }],
-    //   'body2': ['16px', { fontWeight: '400', lineHeight: '24px' }],
-    //   'body2-bold': ['16px', { fontWeight: '500', lineHeight: '24px' }],
-    //   'caption1': ['14px', { fontWeight: '400', lineHeight: '20px' }],
-    //   'caption1-bold': ['14px', { fontWeight: '500', lineHeight: '20px' }],
-    //   'caption2': ['12px', { fontWeight: '400', lineHeight: '18px' }],
-    //   'caption2-bold': ['12px', { fontWeight: '600', lineHeight: '18px' }],
-    //   'caption3': ['11px', { fontWeight: '400', lineHeight: '14px' }],
-    //   'head': ['24px', { fontWeight: '500', lineHeight: '33px' }],
-    //   'head-bold': ['24px', { fontWeight: '600', lineHeight: '33px' }],
-    //   'head-extra-bold': ['24px', { fontWeight: '700', lineHeight: '33px' }],
-    //   'number': ['18px', { fontWeight: '400', lineHeight: '20px' }],
-    //   'number-bold': ['18px', { fontWeight: '500', lineHeight: '20px' }],
-    //   'number-extra-bold': ['18px', { fontWeight: '600', lineHeight: '20px' }],
-    //   'subTitle': ['18px', { fontWeight: '500', lineHeight: '26px' }],
-    //   'subTitle-bold': ['18px', { fontWeight: '600', lineHeight: '26px' }],
-    //   'title': ['21px', { fontWeight: '500', lineHeight: '30px' }],
-    //   'title-bold': ['21px', { fontWeight: '600', lineHeight: '30px' }],
-    //   'title-extra-bold': ['21px', { fontWeight: '700', lineHeight: '30px' }],
-    // },
+    extend: {
+      // container: {
+      //   center: true,
+      //   padding: "16px",
+      //   screens: "var(--content-container-width)",
+      // },
+      colors: {
+        border: "hsl(var(--border))",
+        input: "hsl(var(--input))",
+        ring: "hsl(var(--ring))",
+        background: "hsl(var(--background))",
+        foreground: "hsl(var(--foreground))",
+        primary: {
+          DEFAULT: "hsl(var(--primary))",
+          foreground: "hsl(var(--primary-foreground))",
+        },
+        secondary: {
+          DEFAULT: "hsl(var(--secondary))",
+          foreground: "hsl(var(--secondary-foreground))",
+        },
+        destructive: {
+          DEFAULT: "hsl(var(--destructive))",
+          foreground: "hsl(var(--destructive-foreground))",
+        },
+        muted: {
+          DEFAULT: "hsl(var(--muted))",
+          foreground: "hsl(var(--muted-foreground))",
+        },
+        accent: {
+          DEFAULT: "hsl(var(--accent))",
+          foreground: "hsl(var(--accent-foreground))",
+        },
+        popover: {
+          DEFAULT: "hsl(var(--popover))",
+          foreground: "hsl(var(--popover-foreground))",
+        },
+        card: {
+          DEFAULT: "hsl(var(--card))",
+          foreground: "hsl(var(--card-foreground))",
+        },
+      },
+      borderRadius: {
+        lg: "var(--radius)",
+        md: "calc(var(--radius) - 2px)",
+        sm: "calc(var(--radius) - 4px)",
+      },
+      keyframes: {
+        "accordion-down": {
+          from: { height: "0" },
+          to: { height: "var(--radix-accordion-content-height)" },
+        },
+        "accordion-up": {
+          from: { height: "var(--radix-accordion-content-height)" },
+          to: { height: "0" },
+        },
+      },
+      animation: {
+        "accordion-down": "accordion-down 0.2s ease-out",
+        "accordion-up": "accordion-up 0.2s ease-out",
+      },
+    },
   },
+  plugins: [
+    plugin(({ addUtilities }) => {
+      addUtilities(utilClasses as CSSRuleObject);
+    }),
+    require("tailwindcss-animate"),
+  ],
 } satisfies Config;
 
 export default config;
@@ -433,44 +311,3 @@ const utilClasses = {
     lineHeight: "36px",
   },
 } as { [key: string]: CSSProperties };
-
-// import type { Config } from "tailwindcss"
-
-// const config = {
-//   darkMode: ["class"],
-//   content: [
-//     './pages/**/*.{ts,tsx}',
-//     './components/**/*.{ts,tsx}',
-//     './app/**/*.{ts,tsx}',
-//     './src/**/*.{ts,tsx}',
-//   ],
-//   prefix: "r",
-//   theme: {
-//     container: {
-//       center: true,
-//       padding: "2rem",
-//       screens: {
-//         "2xl": "1400px",
-//       },
-//     },
-//     extend: {
-//       keyframes: {
-//         "accordion-down": {
-//           from: { height: "0" },
-//           to: { height: "var(--radix-accordion-content-height)" },
-//         },
-//         "accordion-up": {
-//           from: { height: "var(--radix-accordion-content-height)" },
-//           to: { height: "0" },
-//         },
-//       },
-//       animation: {
-//         "accordion-down": "accordion-down 0.2s ease-out",
-//         "accordion-up": "accordion-up 0.2s ease-out",
-//       },
-//     },
-//   },
-//   plugins: [require("tailwindcss-animate")],
-// } satisfies Config
-
-// export default config

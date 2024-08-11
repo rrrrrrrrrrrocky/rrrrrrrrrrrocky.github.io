@@ -2,6 +2,7 @@ module.exports = {
   extends: [
     "@rrrrrrrrrrr/eslint-config/typescript",
     "@rrrrrrrrrrr/eslint-config/next",
+    "@rrrrrrrrrrr/eslint-config/tailwindcss",
     "plugin:@tanstack/eslint-plugin-query/recommended",
   ],
   ignorePatterns: ["dist", ".eslintrc.cjs", "*.config.cjs"],

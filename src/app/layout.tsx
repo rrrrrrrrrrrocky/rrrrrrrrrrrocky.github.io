@@ -1,25 +1,19 @@
 import "@/resource/style/global.css";
+
 import Link from "next/link";
+import { ReactNode } from "react";
+
+import Header from "@/component/ui/header";
 
 export const metadata = {
   title: "r_11 blog",
   description: "rrrrrrrrrrrocky 블로그입니다.",
 };
 
-export default function RootLayout({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
-  let header = (
-    <header>
-      <Link href={"/"}>
-        <h1>HEADER</h1>
-      </Link>
-    </header>
-  );
+const RootLayout = ({ children }: { children: ReactNode }) => {
+  const header = <Header />;
 
-  let footer = (
+  const footer = (
     <footer>
       <p>FOOTER</p>
     </footer>
@@ -38,12 +32,14 @@ export default function RootLayout({
           httpEquiv="cache-control"
         />
       </head>
-      <body>
-        공사중
-        {header}
+      <body className="relative">
+        {/* {header} */}
+        <Header />
         {children}
         {footer}
       </body>
     </html>
   );
-}
+};
+
+export default RootLayout;

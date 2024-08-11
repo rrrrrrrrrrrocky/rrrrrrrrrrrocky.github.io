@@ -2,11 +2,7 @@
   "compilerOptions": {
     "target": "ESNext",
     "useDefineForClassFields": true,
-    "lib": [
-      "ESNext",
-      "DOM",
-      "DOM.Iterable"
-    ],
+    "lib": ["ESNext", "DOM", "DOM.Iterable"],
     "module": "ESNext",
     "skipLibCheck": true,
     /* Bundler mode */
@@ -22,9 +18,7 @@
     "noUnusedParameters": true,
     "noFallthroughCasesInSwitch": true,
     "paths": {
-      "@/*": [
-        "./src/*"
-      ]
+      "@/*": ["./src/*"]
     },
     "allowJs": true,
     "incremental": true,
@@ -35,16 +29,6 @@
       }
     ]
   },
-  "include": [
-    "src",
-    ".next/types/**/*.ts"
-  ],
-  "references": [
-    {
-      "path": "./tsconfig.node.json"
-    }
-  ],
-  "exclude": [
-    "node_modules"
-  ]
+  "include": ["src", ".next/types/**/*.ts"],
+  "exclude": ["node_modules"]
 }

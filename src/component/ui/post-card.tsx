@@ -5,7 +5,7 @@ interface Props {}
 const PostCard = (props: any) => {
   const { post } = props;
   return (
-    <Link className="unstyled" href={`/recipe/${post.slug}`}>
+    <Link className="unstyled" href={`/posts/${post.slug}`}>
       <div className="postCard">
         <h3>{post.title}</h3>
         <p>{post.bio}</p>

@@ -1,9 +1,10 @@
+import { cn } from "@/script/util/ui-util";
 import React from "react";
-import { ClassNameValue, twMerge } from "tailwind-merge";
+import { ClassNameValue } from "tailwind-merge";
 
 type ReactLayoutTagName = Pick<
   React.JSX.IntrinsicElements,
-  "section" | "article" | "main" | "form" | "header" | "footer" | "nav"
+  "div" | "section" | "article" | "ul" | "li" | "button" | "form"
 >;
 
 type ReactTag = keyof ReactLayoutTagName | React.JSXElementConstructor<unknown>;
@@ -21,21 +22,21 @@ type Props<TTag extends ReactTag = keyof ReactLayoutTagName> = Omit<
   className?: ClassNameValue;
 };
 
-declare let ContainerType: <TTag extends ReactTag = keyof ReactLayoutTagName>(
+declare let BoxType: <TTag extends ReactTag = keyof ReactLayoutTagName>(
   // eslint-disable-next-line no-unused-vars
   props: Props<TTag> & { ref?: React.ForwardedRef<HTMLElement> }
 ) => React.JSX.Element;
 
-export const Container = React.forwardRef<HTMLElement, Props<ReactTag>>(
+export const Box = React.forwardRef<HTMLElement, Props<ReactTag>>(
   ({ children, component = "div", className = "", ...props }, ref) => {
     return React.createElement(
       component,
       {
         ...props,
-        className: twMerge(className),
+        className: cn(className),
         ref,
       },
       children
     );
   }
-) as typeof ContainerType;
+) as typeof BoxType;

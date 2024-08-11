@@ -5,13 +5,13 @@
   "tsx": true,
   "tailwind": {
     "config": "tailwind.config.ts",
-    "css": "src/resource/style/global.css",
-    "baseColor": "slate",
-    "cssVariables": false,
-    "prefix": "r"
+    "css": "src/resource/style/shadcn.css",
+    "baseColor": "gray",
+    "cssVariables": true,
+    "prefix": ""
   },
   "aliases": {
     "components": "@/component",
-    "utils": "@/script/ui-util"
+    "utils": "@/script/util/ui-util.ts"
   }
 }
