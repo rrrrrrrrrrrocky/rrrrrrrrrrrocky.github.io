@@ -1,6 +1,6 @@
 import { useRouter } from "next/router";
 import React, { useState } from "react";
-import Container from "@/component/ui/container";
+import { Container } from "@/component/ui/container";
 
 const Write = () => {
   const router = useRouter();

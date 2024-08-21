@@ -1,6 +1,5 @@
 import "@/resource/style/global.css";
 
-import Link from "next/link";
 import { ReactNode } from "react";
 
 import Header from "@/component/ui/header";

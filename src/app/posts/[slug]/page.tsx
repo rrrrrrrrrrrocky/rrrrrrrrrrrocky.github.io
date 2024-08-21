@@ -2,10 +2,12 @@ import Markdown from "markdown-to-jsx";
 import React from "react";
 import fs from "fs";
 import matter from "gray-matter";
-import getPostMetadata from "@/script/util/service-util";
+import getPostMetadata from "@/script/util/service-utils";
+import MDEditor from "@uiw/react-md-editor";
+import Content from "@/component/content";
 
 function getPostContent(slug: any) {
-  const folder = "recipes/";
+  const folder = "src/_post/";
   const file = folder + `${slug}.md`;
   const content = fs.readFileSync(file, "utf8");
 
@@ -32,7 +34,8 @@ export default function RecipePage(props: any) {
   return (
     <main>
       <article>
-        <Markdown>{post.content}</Markdown>
+        <Content content={post.content} />
+        {/* <Markdown>{post.content}</Markdown> */}
       </article>
     </main>
   );

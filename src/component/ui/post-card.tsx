@@ -8,7 +8,7 @@ const PostCard = (props: any) => {
     <Link className="unstyled" href={`/posts/${post.slug}`}>
       <div className="postCard">
         <h3>{post.title}</h3>
-        <p>{post.bio}</p>
+        <p>{post.content}</p>
         <div className="statsContainer">
           <div>
             <h5>Prep Time</h5>

@@ -1,4 +1,4 @@
-import { cn } from "@/script/util/ui-util";
+import { cn } from "@/script/util/ui-utils";
 import React from "react";
 import { ClassNameValue } from "tailwind-merge";
 
