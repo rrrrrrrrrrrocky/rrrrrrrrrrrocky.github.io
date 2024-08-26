@@ -34,7 +34,14 @@ const Write = async () => {
   const {
     data: { user },
   } = await supabase.auth.getUser();
+  const {
+    data: { session },
+  } = await supabase.auth.getSession();
   console.log("user >>", user);
+  console.log("session >>", session);
+  // if (session) {
+  //   alert("oa");
+  // }
   // supabase.auth.signInWithOAuth({
   //   provider: "google",
   //   options: {
@@ -44,6 +51,13 @@ const Write = async () => {
   // console.log("supabase >>", supabase.auth);
   // if (!session || session.user.email !== "rrrrrrrrrrrocky@gmail.com") {
   if (!user) {
+    // const { data, error } = await supabase.auth.signInWithPassword({
+    //   email: "ysh1394@naver.com",
+    //   password: "1234",
+    // });
+    // if (error) {
+    //   return encodedRedirect("error", "/login", "Could not authenticate user");
+    // }
     const { data, error } = await supabase.auth.signInWithOAuth({
       provider: "google",
       options: {
@@ -64,3 +78,11 @@ const Write = async () => {
 };
 
 export default Write;
+
+function encodedRedirect(
+  type: "error" | "success",
+  path: string,
+  message: string
+) {
+  return redirect(`${path}?${type}=${encodeURIComponent(message)}`);
+}

@@ -41,15 +41,19 @@ export async function GET(request: Request) {
   // return the user to an error page with instructions
   // return NextResponse.redirect(${origin}/auth/auth-code-error)
 
-  if (code) {
-    const supabase = createSupabaseServer();
-    // const token = await supabase.auth.exchangeCodeForSession(code, {
-    //   provider: "google",
-    //   codeVerifier,
-    // });
+  if (!code) {
+    return NextResponse.redirect(`${origin}/auth/auth-code-error`);
+  }
 
-    // const supabase = createRouteHandlerClient({ cookies });
+  const supabase = createSupabaseServer();
+  // const token = await supabase.auth.exchangeCodeForSession(code, {
+  //   provider: "google",
+  //   codeVerifier,
+  // });
 
+  // const supabase = createRouteHandlerClient({ cookies });
+
+  try {
     const token = await supabase.auth.exchangeCodeForSession(
       // "34e770dd-9ff9-416c-87fa-43b31d7ef225"
       code
@@ -71,8 +75,11 @@ export async function GET(request: Request) {
         return NextResponse.redirect(`${origin}${next}`);
       }
     }
+    return NextResponse.redirect(`${origin}${next}`);
+  } catch (err) {
+    console.error("err >>>", err);
+    return NextResponse.redirect(`${origin}/client?code=${code}`);
   }
 
   // return the user to an error page with instructions
-  return NextResponse.redirect(`${origin}/auth/auth-code-error`);
 }
