@@ -32,8 +32,8 @@ const RootLayout = ({ children }: { children: ReactNode }) => {
         />
       </head>
       <body className="relative">
-        {/* {header} */}
-        <Header />
+        {header}
+        {/* <Header /> */}
         {children}
         {footer}
       </body>
