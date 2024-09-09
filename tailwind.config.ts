@@ -5,6 +5,9 @@ import type { Config } from "tailwindcss";
 
 /** @type {import('tailwindcss').Config} */
 const config = {
+  // corePlugins: {
+  //   preflight: false,
+  // },
   darkMode: ["class"],
   content: ["./src/**/*.{ts,tsx}"],
   prefix: "",
