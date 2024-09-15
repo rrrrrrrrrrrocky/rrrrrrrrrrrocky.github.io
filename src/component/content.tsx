@@ -1,6 +1,6 @@
 "use client";
 
-import MDEditor from "@uiw/react-md-editor";
+import SimpleMarkdownPreview from "./_common/simple-markdown-editor/simple-markdown-preview";
 
 const Content = ({ content }: { content: string }) => {
   return (
@@ -8,7 +8,7 @@ const Content = ({ content }: { content: string }) => {
       className="markdownDiv"
       data-color-mode="light"
       style={{ padding: 15 }}>
-      <MDEditor.Markdown style={{ padding: 10 }} source={content} />
+      <SimpleMarkdownPreview htmlString={content} />
     </div>
   );
 };

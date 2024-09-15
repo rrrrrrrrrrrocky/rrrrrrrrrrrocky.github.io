@@ -3,6 +3,7 @@ import "@/resource/style/global.css";
 import { ReactNode } from "react";
 
 import Header from "@/component/ui/header";
+import ClientProvider from "@/component/_common/client-provider";
 
 export const metadata = {
   title: "r_11 blog",
@@ -12,13 +13,13 @@ export const metadata = {
 const RootLayout = ({ children }: { children: ReactNode }) => {
   const header = <Header />;
 
-  const footer = (
-    <footer>
-      <p>FOOTER</p>
-    </footer>
-  );
+  // const footer = (
+  //   <footer>
+  //     <p>FOOTER</p>
+  //   </footer>
+  // );
   return (
-    <html lang="en">
+    <html lang="ko">
       <head>
         <meta charSet="utf-8" />
         <meta
@@ -31,11 +32,13 @@ const RootLayout = ({ children }: { children: ReactNode }) => {
           httpEquiv="cache-control"
         />
       </head>
+
       <body className="relative">
-        {header}
-        {/* <Header /> */}
-        {children}
-        {footer}
+        <ClientProvider>
+          {header}
+          {children}
+          {/* {footer} */}
+        </ClientProvider>
       </body>
     </html>
   );

@@ -11,7 +11,7 @@ export default function getPostMetadata(basePath: string) {
     .map((filename) => {
       const fileContents = fs.readFileSync(`${basePath}/${filename}`, "utf8");
       const matterResult = matter(fileContents);
-      console.log("matterResult >>>", matterResult);
+      // console.log("matterResult >>>", matterResult);
       return {
         title: matterResult.data.title,
         // prep_time: matterResult.data.prep_time,

@@ -1,0 +1,109 @@
+/* GFM 고유 체크박스 스타일 */
+.markdown-body input[type="checkbox"] {
+  margin: 0 0.2em 0.25em -1.6em;
+  vertical-align: middle;
+  cursor: pointer;
+}
+
+.markdown-body li.task-list-item {
+  list-style-type: none;
+}
+
+/* GFM 표 스타일 */
+.markdown-body table {
+  border-collapse: collapse;
+  display: block;
+  width: 100%;
+  overflow: auto;
+}
+
+.markdown-body th {
+  background-color: #f6f8fa;
+  font-weight: bold;
+}
+
+.markdown-body td,
+.markdown-body th {
+  padding: 0.6em 1em;
+  border: 1px solid #dfe2e5;
+}
+
+.markdown-body table tr:nth-child(2n) {
+  background-color: #f6f8fa;
+}
+
+/* GFM 코드 블록 스타일 */
+.markdown-body pre {
+  background-color: #f6f8fa;
+  border-radius: 6px;
+  padding: 16px;
+  overflow: auto;
+}
+
+.markdown-body pre code {
+  background-color: transparent;
+  padding: 0;
+}
+
+.markdown-body code {
+  background-color: rgba(27, 31, 35, 0.05);
+  padding: 0.2em 0.4em;
+  border-radius: 3px;
+  font-family: "Courier New", Courier, monospace;
+}
+
+/* GFM 인라인 하이라이트 */
+.markdown-body code {
+  background-color: rgba(135, 131, 120, 0.15);
+  padding: 0.2em 0.4em;
+  border-radius: 3px;
+  font-size: 85%;
+}
+
+/* 블록 인용 스타일 */
+.markdown-body blockquote {
+  padding: 0.5em 1em;
+  color: #6a737d;
+  border-left: 0.25em solid #dfe2e5;
+  margin: 1.5em 0;
+  background-color: #f9f9f9;
+}
+
+/* GFM 이미지 스타일 */
+.markdown-body img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 4px;
+}
+
+/* GFM 링크 스타일 */
+.markdown-body a {
+  color: #0366d6;
+  text-decoration: none;
+}
+
+.markdown-body a:hover {
+  text-decoration: underline;
+}
+
+/* GFM 수평선 스타일 */
+.markdown-body hr {
+  border: 0;
+  height: 1px;
+  background: #e1e4e8;
+  margin: 2em 0;
+}
+
+/* GFM Task List 스타일 */
+.markdown-body ul.task-list {
+  list-style: none;
+  padding-left: 0;
+}
+
+.markdown-body ul.task-list li {
+  padding-left: 1.8em;
+}
+
+.markdown-body ul.task-list li input[type="checkbox"] {
+  margin-right: 0.5em;
+}

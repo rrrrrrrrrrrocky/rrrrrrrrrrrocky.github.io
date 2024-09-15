@@ -1,9 +1,7 @@
-import Markdown from "markdown-to-jsx";
 import React from "react";
 import fs from "fs";
 import matter from "gray-matter";
 import getPostMetadata from "@/script/util/service-utils";
-import MDEditor from "@uiw/react-md-editor";
 import Content from "@/component/content";
 
 function getPostContent(slug: any) {
@@ -20,7 +18,7 @@ export const generateStaticParams = async () => {
   return posts.map((post) => ({ slug: post.slug }));
 };
 
-export async function generateMetadata({ params, searchParams }: any) {
+export async function generateMetadata({ params }: any) {
   const id = params?.slug ? " ⋅ " + params?.slug : "";
   return {
     title: `The Bubbly Baker ${id.replaceAll("_", " ")}`,
@@ -30,7 +28,7 @@ export async function generateMetadata({ params, searchParams }: any) {
 export default function RecipePage(props: any) {
   const slug = props.params.slug;
   const post = getPostContent(slug);
-  console.log(post);
+  // console.log(post);
   return (
     <main>
       <article>

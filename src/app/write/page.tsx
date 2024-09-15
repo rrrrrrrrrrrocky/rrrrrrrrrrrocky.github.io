@@ -1,88 +1,43 @@
-// import { useRouter } from "next/router";
-// import React, { useState } from "react";
-import { Container } from "@/component/ui/container";
-import { createSupabaseServer } from "@/script/util/supabase-utils";
-import { redirect } from "next/navigation";
+import dynamic from "next/dynamic";
 
-// const signIn = async (formData: FormData) => {
-//   "use server";
+const Write = dynamic(() => import("@/component/write/_write-container"), {
+  loading: () => <p>dynamic Loading...</p>,
+  ssr: false,
+});
 
-//   const email = formData.get("email") as string;
-//   const password = formData.get("password") as string;
-//   const supabase = createClient();
+const WritePage = async () => {
+  // const supabase = createSupabaseServer();
 
-//   const { error } = await supabase.auth.signInWithPassword({
-//     email,
-//     password,
-//   });
-
-//   if (error) {
-//     return encodedRedirect("error", "/login", "Could not authenticate user");
-//   }
-
-//   return redirect("/protected");
-// };
-
-// // const { error } = await supabase.auth.signInWithPassword({
-// //   email,
-// //   password,
-// // });
-
-const Write = async () => {
-  const supabase = createSupabaseServer();
-
-  const {
-    data: { user },
-  } = await supabase.auth.getUser();
-  const {
-    data: { session },
-  } = await supabase.auth.getSession();
-  console.log("user >>", user);
-  console.log("session >>", session);
-  // if (session) {
-  //   alert("oa");
+  // let userData;
+  // const {
+  //   data: { user },
+  //   error,
+  // } = await supabase.auth.getUser();
+  // if (user) {
+  //   userData = user;
+  //   console.log("userData >>", userData);
   // }
-  // supabase.auth.signInWithOAuth({
-  //   provider: "google",
-  //   options: {
-  //     redirectTo: "/", // 로그인 성공 후 이동할 URL
-  //   },
-  // });
-  // console.log("supabase >>", supabase.auth);
-  // if (!session || session.user.email !== "rrrrrrrrrrrocky@gmail.com") {
-  if (!user) {
-    // const { data, error } = await supabase.auth.signInWithPassword({
-    //   email: "ysh1394@naver.com",
-    //   password: "1234",
-    // });
-    // if (error) {
-    //   return encodedRedirect("error", "/login", "Could not authenticate user");
-    // }
-    const { data, error } = await supabase.auth.signInWithOAuth({
-      provider: "google",
-      options: {
-        redirectTo: "http://localhost:3000/auth/callback",
-        queryParams: {
-          access_type: "offline",
-          prompt: "consent",
-        },
-      },
-    });
 
-    if (data.url) {
-      redirect(data.url); // use the redirect API for your server framework
-    }
-    return;
-  }
-  return <Container>asdasd</Container>;
+  // const { userData, error } = await getUserData();
+  // console.log({ userData, error });
+
+  // if (!userData) {
+  //   return <div>loading...</div>;
+  // } else if (error) {
+  //   return <div>{JSON.stringify(error)}</div>;
+  // } else {
+  //   return <Write userData={userData} />;
+  // }
+
+  return <Write />;
 };
 
-export default Write;
+export default WritePage;
 
-function encodedRedirect(
-  type: "error" | "success",
-  path: string,
-  message: string
-) {
-  return redirect(`${path}?${type}=${encodeURIComponent(message)}`);
-}
+// function encodedRedirect(
+//   type: "error" | "success",
+//   path: string,
+//   message: string
+// ) {
+//   return redirect(`${path}?${type}=${encodeURIComponent(message)}`);
+// }

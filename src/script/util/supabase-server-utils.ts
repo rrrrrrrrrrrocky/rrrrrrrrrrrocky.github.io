@@ -1,17 +1,7 @@
-import {
-  createServerClient,
-  createBrowserClient,
-  type CookieOptions,
-} from "@supabase/ssr";
+import { createServerClient } from "@supabase/ssr";
 import { cookies } from "next/headers";
-import { type NextRequest, NextResponse } from "next/server";
-
-export const createSupabaseClient = () => {
-  return createBrowserClient(
-    process.env.NEXT_PUBLIC_SUPABASE_URL!,
-    process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
-  );
-};
+import { NextRequest, NextResponse } from "next/server";
+// import { type NextRequest, NextResponse } from "next/server";
 
 export function createSupabaseServer() {
   const cookieStore = cookies();

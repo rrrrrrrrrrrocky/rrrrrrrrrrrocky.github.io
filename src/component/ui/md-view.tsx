@@ -8,7 +8,7 @@ export default function SearchView(props: any) {
   const searchParams = useSearchParams();
   const keyword = searchParams.get("keyword") || "";
 
-  console.log("keyword.toLowerCase( >>", keyword.toLowerCase());
+  // console.log("keyword.toLowerCase( >>", keyword.toLowerCase());
   return (
     <>
       <div className="postsContainer">
