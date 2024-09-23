@@ -1,5 +1,6 @@
 import { Container } from "@/component/ui/container";
-import SearchView from "@/component/ui/md-view";
+import MarkdownListView from "@/component/ui/markdown-list-view";
+// import SearchView from "@/component/ui/md-view";
 import getPostMetadata from "@/script/util/service-utils";
 
 export default function Home() {
@@ -7,7 +8,8 @@ export default function Home() {
   // console.log("postMetadata >>", postMetadata);
   return (
     <Container component="main" className="container mx-auto">
-      <SearchView postMetadata={postMetadata} />
+      <MarkdownListView postMetadata={postMetadata} />
+      {/* <SearchView postMetadata={postMetadata} /> */}
     </Container>
   );
 }

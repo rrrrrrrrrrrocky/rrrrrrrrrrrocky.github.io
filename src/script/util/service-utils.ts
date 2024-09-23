@@ -2,7 +2,15 @@ import fs from "fs";
 import matter from "gray-matter";
 import path from "path";
 
-export default function getPostMetadata(basePath: string) {
+export interface PostMetaData {
+  title: string;
+  slug: string;
+  content: string;
+  tags: Array<string>;
+  createdAt: string;
+}
+
+export default function getPostMetadata(basePath: string): Array<PostMetaData> {
   const folder = basePath + "/";
   // 디렉토리 내의 모든 항목 가져오기
   const items = fs.readdirSync(folder);
