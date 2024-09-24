@@ -11,9 +11,7 @@ import { useRef, useState } from "react";
 const Write = () => {
   const textareaRef = useRef<HTMLTextAreaElement>(null);
   const [htmlString, setHtmlString] = useState("");
-  const { userData, isLoading, isError, error } = useUserData();
-
-  console.log("userData >>", userData);
+  const { isLoading, isError, error } = useUserData();
 
   // const uploadFile = async (file: File) => {
   //   const formData = new FormData();

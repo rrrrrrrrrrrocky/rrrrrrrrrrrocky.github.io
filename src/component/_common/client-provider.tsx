@@ -1,4 +1,5 @@
 "use client";
+import "dayjs/locale/ko";
 
 import {
   isServer,

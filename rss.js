@@ -1,12 +1,12 @@
-// import OpenAI from "openai";
 const Parser = require("rss-parser");
 const fs = require("fs");
 const OpenAI = require("openai");
 const path = require("path");
 const dayjs = require("dayjs");
+require("dotenv").config();
 
 // RSS 피드 URL
-const RSS_FEED_URL = "https://medium.com/feed/tag/frontend"; // 구독할 RSS 피드 URL로 변경하세요
+const RSS_FEED_URL = process.env.RSS_FEED_URL; // 구독할 RSS 피드 URL로 변경하세요
 
 // RSS 파서 초기화
 const parser = new Parser();
@@ -16,12 +16,12 @@ const parser = new Parser();
  * @param {*} guid example - https://medium.com/p/39e6f2492ad6
  */
 const splitGuid = (guid) => {
-  const lastPath = guid.split("/");
-  return lastPath[lastPath.length - 1];
+  const splitPath = guid.split("/");
+  return `${splitPath[splitPath.length - 2]}_${splitPath[splitPath.length - 1]}`;
 };
 
 // 기존에 작성된 guid 검증 후 RSS 추가하는 함수
-async function checkForNewPosts() {
+const checkForNewPosts = async () => {
   try {
     // 1. feed: RSS 피드 가져오기
     const feed = await parser.parseURL(RSS_FEED_URL);
@@ -33,38 +33,53 @@ async function checkForNewPosts() {
       return !Boolean(fs.existsSync(uniqueBlogFolder));
     });
 
-    // 3. 2번의 배열에 데이터가 있을 경우, 첫번째 데이터의 타이틀로 gpt에게 질의 (content 비교는 유료 플랜일 경우 데이터가 없어서 비교가 어려움)
+    // 3. 2번의 배열에 데이터가 있을 경우, 첫번째 데이터의 타이틀로 gpt에게 질의 (비용절감을 위해 content 길이를 제한해서 gpt에게 전달)
     if (newItems.length > 0) {
       const uuid = splitGuid(newItems[0].guid);
 
-      const openAI = new OpenAI({
-        apiKey:'',
-      });
+      const plainTextContent = newItems[0].content
+        .replace(/<\/?[^>]+(>|$)/g, "")
+        .substring(0, 500);
 
+      const openAI = new OpenAI({
+        apiKey: process.env.OPEN_AI_API_KEY,
+      });
       const completion = await openAI.chat.completions.create({
         messages: [
-          { role: "system", content: "너는 세계 최고의 IT 웹개발자야" },
+          { role: "system", content: "너는 세계 최고의 FrontEnd 웹개발자야" },
           {
             role: "user",
             content: `
-              - 블로깅 키워드: ${newItems[0].title} \n
-              블로깅 키워드를 토대로 2,000자 이상의 정도의 블로그 글을 아래의 작성 요건에 맞춰서 작성해줘 \n
-              1. 블로깅 키워드가 한국어가 아니어도 번역해서 한국어로 블로그 작성을 할 것 (금액, 날짜 등의 데이터 또한 한국데이터에 맞게 바꿀 것) \n 
-              2. 다른 대답이나 잡담은 하지 말고, 대답에는 아래의 데이터 형태(frontmatter)에 맞춰서만 응답 할 것 \n
-                ---\n
-                uuid: ${uuid}\n
-                title: 블로그 내용을 한줄로 담을 수 있는 타이틀(약 60자 내외)\n
-                createdAt: ${dayjs().format("YYYY-MM-DD HH:mm:ss")}\n
-                tags: 분석한 내용 중 중요한 키워드(띄어쓰기 없는 하나의 단어)들의 배열 (ex: ['react', '서버컴포넌트', 'axios', ...])\n
-                ---\n\n
-                마크다운형식의 블로그 원문
-              3. 2번의 데이터에서 title, createdAt, uuid는 따옴표로 감싸서 특수문자때문에 파싱에러가 나지 않도록 응답해줘
-            `,
+                - 블로깅 키워드: ${newItems[0].title} \n
+                - 참조 블로그 원문 (500자 이내): ${plainTextContent} \n
+                '블로깅 키워드'와 '참조 블로그 원문'을 참조해서 아래의 작성 요건에 맞춰서 작성해줘 \n
+                1. 3,000자 이상으로 최대한 전문적인 지식을 기반으로 작성 할 것 \n
+                2. 목차는 아래와 같이 구성해줘 \n
+                  - 소개 \n
+                  - 배경 및 필요성 \n
+                  - 핵심 내용 \n
+                  - 예시 \n
+                3. 블로깅 키워드가 한국어가 아니어도 번역해서 한국어로 블로그 작성을 할 것 (금액, 날짜 등의 데이터 또한 한국데이터에 맞게 바꿀 것) \n
+                4. 다른 대답이나 잡담은 하지 말고, 대답에는 아래의 데이터 형태(frontmatter)에 맞춰서만 응답 할 것 \n
+                  ---\n
+                  uuid: ${uuid}\n
+                  title: 블로그 내용을 한줄로 담을 수 있는 타이틀(약 60자 내외)\n
+                  createdAt: ${dayjs().format("YYYY-MM-DD HH:mm:ss")}\n
+                  tags: ${newItems[0].categories} 태그들을 아래의 조건에 맞게 작성해줘 \n
+                    - 데이터 형태: javascript string[] \n
+                    - 문자 형태: camelCase \n
+                    - 배열의 최대 길이: 4개 \n
+                    - tags 검열: ${newItems[0].categories} 에서 일반적으로 사용되지 않는 태그는 제거 
+                  description: 작성된 블로그를 홍보하는 홍보담당자 마인드로 description 작성 할 것(글자수: 100자)
+                  ---\n\n
+                  
+                  마크다운형식의 블로그 내용 작성 (1번 3,000자 이상으로, 2번 목차를 꼭 지켜서 작성 할 것)
+                5. 4번의 데이터에서 title, createdAt, uuid, tags, description는 따옴표로 감싸서 특수문자때문에 파싱에러가 나지 않도록 응답해줘
+              `,
           },
         ],
-        model: "gpt-3.5-turbo",
+        model: process.env.GPT_MODEL,
       });
-
       const responseContent = completion.choices[0].message.content;
       console.info("답변 원문 >>", responseContent);
       const responsePromptData = {
@@ -79,7 +94,7 @@ async function checkForNewPosts() {
   } catch (error) {
     console.error(`RSS 피드를 가져오는 중 오류 발생: ${error.message}`);
   }
-}
+};
 
 const writeFile = (responsePromptData) => {
   const folderPath = path.join(

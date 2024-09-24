@@ -21,6 +21,7 @@
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.1.1",
     "dayjs": "^1.11.13",
+    "dotenv": "^16.4.5",
     "gray-matter": "^4.0.3",
     "html-react-parser": "^5.1.16",
     "lucide-react": "^0.445.0",

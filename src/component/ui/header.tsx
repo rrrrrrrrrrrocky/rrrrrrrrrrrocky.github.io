@@ -5,7 +5,9 @@ import { Container } from "./container";
 import { Box } from "./box";
 import { Typography } from "./typography";
 import { Button } from "./button";
-import { SearchBar } from "./search-bar";
+import dynamic from "next/dynamic";
+
+const SearchBar = dynamic(() => import("./search-bar"));
 
 const Header = () => {
   return (
@@ -21,12 +23,11 @@ const Header = () => {
             src="/favicon/favicon-32x32.png"
             width={24}
           />
-          <Typography component="h1" className="b1-700">
-            R*11
-          </Typography>
+          <Typography component="h2">R_11</Typography>
         </Box>
         <Box className="flex items-center justify-end gap-x-2">
           <SearchBar />
+
           <Button size="sm">구독하기</Button>
         </Box>
       </Box>

@@ -31,12 +31,23 @@ const config = {
         "Noto Color Emoji",
       ],
     },
+    screens: {
+      sm: "320px", // 작은 화면
+      md: "768px", // 중간 화면
+      lg: "1024px", // 큰 화면
+      xl: "1280px", // 더 큰 화면
+    },
     extend: {
-      // container: {
-      //   center: true,
-      //   padding: "16px",
-      //   screens: "var(--content-container-width)",
-      // },
+      container: {
+        center: true,
+        padding: "16px",
+        screens: {
+          sm: "100%", // 작은 화면에서는 100% 너비
+          md: "768px", // 중간 화면에서는 640px 너비
+          lg: "1024px", // 큰 화면에서는 768px 너비
+          xl: "1280px", // 더 큰 화면에서는 1024px 너비
+        },
+      },
       colors: {
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",

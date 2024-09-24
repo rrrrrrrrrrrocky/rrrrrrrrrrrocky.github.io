@@ -9,7 +9,6 @@ import breaks from "remark-breaks";
 import remarkFrontmatter from "remark-frontmatter";
 
 export const markdownToHtml = async (value: string) => {
-  console.log("value >>", value);
   const processor = remark()
     .data("settings", {
       allowDangerousHtml: true,

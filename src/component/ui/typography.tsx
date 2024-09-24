@@ -1,5 +1,11 @@
-import React, { ComponentProps, createElement, ReactNode } from "react";
-import { twMerge } from "tailwind-merge";
+import { cn } from "@/script/util/ui-utils";
+import { ClassValue } from "clsx";
+import React, {
+  ComponentProps,
+  createElement,
+  ReactNode,
+  useMemo,
+} from "react";
 
 type ReactTextTagName = keyof Pick<
   React.JSX.IntrinsicElements,
@@ -20,11 +26,31 @@ export const Typography: typeof Typo = ({
   color,
   ...props
 }) => {
+  const componentResetClassName = useMemo((): ClassValue => {
+    switch (component) {
+      case "h1": {
+        return "b1-700";
+      }
+      case "h2": {
+        return "b2-700";
+      }
+      case "h3": {
+        return "b3-700";
+      }
+      case "p": {
+        return "c1-400";
+      }
+      default: {
+        return "c2-400";
+      }
+    }
+  }, []);
+
   return createElement(
     component,
     {
       ...props,
-      className: twMerge(props.className),
+      className: cn(componentResetClassName, props.className),
     },
     children
   );

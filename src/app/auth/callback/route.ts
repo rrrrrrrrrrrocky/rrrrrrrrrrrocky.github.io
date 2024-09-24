@@ -1,22 +1,29 @@
 import { createSupabaseServer } from "@/script/util/supabase-server-utils";
 import { NextResponse } from "next/server";
 
+export const dynamic = "force-dynamic"; // 이 페이지를 SSR로 강제 처리
+
 export async function GET(request: Request) {
   let code;
   let redirectUrl;
+  let urlOrigin;
   try {
-    const { searchParams /* origin */ } = new URL(request.url);
+    const { searchParams, origin: requestUrlOrigin } = new URL(request.url);
+    urlOrigin = requestUrlOrigin;
     code = searchParams.get("code");
     redirectUrl = searchParams.get("redirectUrl") ?? "/";
   } catch {
-    return NextResponse.redirect(
-      `${origin}/error?code=URL_PARSE_ERROR&message=request url이 없습니다`
+    throw new Error(
+      JSON.stringify({
+        code: "URL_PARSE_ERROR",
+        message: "request url이 없습니다",
+      })
     );
   }
 
   if (!code) {
     return NextResponse.redirect(
-      `${origin}/error?code=CODE_ERROR&message=구글에서 내려온 code가 없습니다`
+      `${urlOrigin}/error?code=CODE_ERROR&message=구글에서 내려온 code가 없습니다`
     );
   }
 
@@ -46,7 +53,7 @@ export async function GET(request: Request) {
   } catch (err) {
     console.error("err >>>", err);
     return NextResponse.redirect(
-      `${origin}/error?code=TOKEN_ERROR&message=토큰이 없습니다`
+      `${urlOrigin}/error?code=TOKEN_ERROR&message=토큰이 없습니다`
     );
   }
 }

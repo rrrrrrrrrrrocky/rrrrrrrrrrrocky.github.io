@@ -1,13 +1,9 @@
 ---
-
 uuid: "ce32dd80da9e"
-
 title: "JavaScript Path Finder: get을 위한 Polyfill 구현하기"
-
 createdAt: "2024-09-23 18:57:53"
-
-tags: ["JavaScript", "Polyfill", "Path Finder"]
-
+tags: ["javaScript", "polyfill", "pathFinder"]
+description: "JavaScript에서 객체 값에 효율적으로 접근하는 방법! Polyfill로 get 메서드를 구현하고 Path Finder를 활용해 중첩된 속성까지 쉽게 처리하세요. JavaScript 개발의 가독성과 유지보수성을 높여보세요!"
 ---
 
 # JavaScript Path Finder: get을 위한 Polyfill 구현하기
@@ -24,12 +20,12 @@ Polyfill은 브라우저가 기본적으로 지원하지 않는 기능을 제공
 
 ```javascript
 if (!Object.prototype.get) {
-  Object.defineProperty(Object.prototype, 'get', {
-    value: function(prop) {
+  Object.defineProperty(Object.prototype, "get", {
+    value: function (prop) {
       return this[prop];
     },
     configurable: true,
-    writable: true
+    writable: true,
   });
 }
 ```
@@ -42,20 +38,20 @@ get 메서드를 통해 객체의 값을 가져오는 것만으로는 부족할 
 
 ```javascript
 function getPath(obj, path) {
-  return path.split('.').reduce((acc, key) => acc && acc[key], obj);
+  return path.split(".").reduce((acc, key) => acc && acc[key], obj);
 }
 
 const exampleObj = {
   user: {
-    name: 'John',
+    name: "John",
     address: {
-      city: 'Seoul'
-    }
-  }
+      city: "Seoul",
+    },
+  },
 };
 
-console.log(getPath(exampleObj, 'user.name')); // Output: John
-console.log(getPath(exampleObj, 'user.address.city')); // Output: Seoul
+console.log(getPath(exampleObj, "user.name")); // Output: John
+console.log(getPath(exampleObj, "user.address.city")); // Output: Seoul
 ```
 
 ## 마무리
